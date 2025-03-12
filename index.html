@@ -24,13 +24,14 @@
             align-items: center;
         }
         
+        /* Update book-container dimensions */
         .book-container {
             width: 90%;
-            max-width: 800px;
-            height: 80vh;
+            max-width: 900px;  /* Increased from 800px */
+            height: 90vh;      /* Increased from 80vh */
             position: relative;
-            perspective: 2000px; /* Increased for better 3D effect */
-            margin: 50px auto;
+            perspective: 2000px;
+            margin: 30px auto;  /* Reduced from 50px to accommodate larger height */
             filter: drop-shadow(0 30px 20px rgba(0,0,0,0.3));
         }
         
@@ -112,19 +113,43 @@
             transform: rotateY(-180deg);
         }
         
+        /* Update page-content padding for better content distribution */
         .page-content {
             position: absolute;
             width: 100%;
             height: 100%;
-            padding: 30px;
+            padding: 40px;     /* Increased from 30px */
             box-sizing: border-box;
             background-color: var(--primary-color);
             color: var(--text-light);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            overflow: auto;
+            overflow: auto; /* Changed from overflow: auto to allow scrolling */
         }
 
+        /* Add specific style for page 8 content */
+        #page-8 .page-content {
+            overflow-y: scroll; /* Force vertical scrollbar */
+            max-height: 100%; /* Ensure content is constrained to page height */
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: var(--accent-color) var(--primary-color); /* For Firefox */
+        }
+
+        /* Customize scrollbar for WebKit browsers */
+        #page-8 .page-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #page-8 .page-content::-webkit-scrollbar-track {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        #page-8 .page-content::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        
         /* Add page fold effect */
         .page-content::after {
             content: '';
@@ -138,9 +163,10 @@
                 rgba(255,255,255,0.1) 100%);
         }
         
+        /* Adjust controls position for larger book */
         .controls {
             position: fixed;
-            bottom: 20px;
+            bottom: 15px;      /* Reduced from 20px */
             left: 0;
             right: 0;
             display: flex;
@@ -654,34 +680,139 @@
                 </div>
             </div>
 
+            <!-- Page 8 - Exercise Part 1 -->
+<div class="page" id="page-8" style="z-index: 2;">
+    <div class="page-content">
+        <h1>Practice Exercise - Part 1</h1>
+        
+        <p>Let's practice what you've learned! Create a Python script to download this HTML file from GitHub.</p>
+        
+        <h3>Step 1: Prepare Your Environment</h3>
+        <div class="note">
+            <strong>Open Command Prompt (CMD):</strong><br>
+            1. Press <code>Windows + R</code><br>
+            2. Type <code>cmd</code> and press Enter<br>
+            3. Or search for "Command Prompt" in Windows search
+        </div>
+
+        <h3>Step 2: Install Required Library</h3>
+        <div class="code-block">
+            <span class="comment"># Type this in CMD:</span><br>
+            pip install requests
+        </div>
+        
+        <h3>Step 3: Create Python Script</h3>
+        <div class="note">
+            1. Open VS Code or your preferred editor<br>
+            2. Create new file named <code>download_flipbook.py</code><br>
+            3. Copy the code below:
+        </div>
+        
+        <div class="code-block">
+            <span class="comment"># Save this as download_flipbook.py</span><br>
+            <span class="keyword">import</span> requests<br>
+            <br>
+            <span class="keyword">def</span> <span class="function">download_flipbook</span>():<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;url = <span class="string">"https://bltzbeat.github.io/Flipbook/"</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = requests.<span class="function">get</span>(url, timeout=5)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.raise_for_status()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"python_flipbook.html"</span>, <span class="string">"w"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.write(response.text)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"FlipBook downloaded successfully!"</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">except</span> requests.Timeout:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"Connection timed out. Please check your internet."</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">except</span> Exception <span class="keyword">as</span> e:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"Error downloading flipbook: {e}"</span>)<br>
+            <br>
+            <span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;download_flipbook()
+        </div>
+        
+        <div class="page-number">8</div>
+    </div>
+</div>
+
+<!-- Page 9 - Exercise Part 2 -->
+<div class="page" id="page-9" style="z-index: 2;">
+    <div class="page-content">
+        <h1>Practice Exercise - Part 2</h1>
+
+        <h3>Step 4: Run the Script</h3>
+        <div class="note">
+            <strong>Using VS Code Terminal:</strong><br>
+            1. Open VS Code and your script<br>
+            2. Press <code>Ctrl + `</code> to open terminal<br>
+            3. Run: <code>python download_flipbook.py</code>
+        </div>
+
+        <div class="note">
+            <strong>Using Command Prompt:</strong><br>
+            1. Navigate to script location:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<code>cd C:\Users\YourName\Desktop</code><br>
+            2. Run the script:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<code>python download_flipbook.py</code>
+        </div>
+
+        <h3>Common Issues & Solutions:</h3>
+        <ul>
+            <li><span class="highlight">ModuleNotFoundError</span>: Run <code>pip install requests</code></li>
+            <li><span class="highlight">Permission Error</span>: Run as administrator</li>
+            <li><span class="highlight">Python not found</span>: Check Python PATH</li>
+            <li><span class="highlight">Timeout Error</span>: Check internet connection</li>
+        </ul>
+
+        <div class="note">
+            <strong>Performance Tips:</strong><br>
+            - Use VS Code's integrated terminal for faster workflow<br>
+            - Keep script in an easily accessible location<br>
+            - Added timeout to prevent long waiting times<br>
+            - Specific error handling for better debugging
+        </div>
+        
+        <div class="note">
+            <strong>File Location:</strong><br>
+            After running the script, find your downloaded file:<br>
+            - Same folder as your Python script<br>
+            - Named: <code>python_flipbook.html</code><br>
+            - Default location example:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<code>C:\Users\YourName\Desktop\python_flipbook.html</code>
+        </div>
+
+        <div class="page-number">9</div>
+    </div>
+</div>
+
             <!-- Back Cover -->
-            <div class="page" id="page-8" style="z-index: 1;">
-                <div class="page-content cover">
-                    <h1>Happy Coding!</h1>
-                    <p>You've learned the basics of Python programming. Keep practicing and exploring to build your skills!</p>
-                    
-                    <!-- Python Logo (Image 2) on back cover -->
-                    <div class="python-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-                            <path d="M150 0c-14.4 0-28.4 1-40.8 2.6-36.2 4.8-42.8 14.9-42.8 33.6v24.7h85.6v11.5H66.4c-18.7 0-35.1 11.2-40.2 32.6-5.9 24.5-6.1 39.8 0 65.3s18.1 32.6 35.3 32.6h22.8v-29.4c0-21.3 18.4-40 40-40h80c17.7 0 32-14.3 32-32v-65.3c0-17.7-15-30.9-32-33.6C192 1.1 180.6 0 160.4 0H150zm-44.6 19.7c8.8 0 16.1 7.3 16.1 16.3s-7.2 16.3-16.1 16.3c-8.9 0-16.1-7.3-16.1-16.3s7.2-16.3 16.1-16.3z" fill="#4584b6"/>
-                            <path d="M219.8 72.4v28.5c0 22.1-18.7 40.7-39.9 40.7h-80c-17.5 0-32 15-32 32.6v61.2c0 17.4 15.1 27.7 32 32.6 20.4 5.9 39.9 7 64.2 0 16.2-4.6 32-13.9 32-32.6v-24.7H132v-11.5h96.3c18.7 0 25.7-13 32.3-32.5 6.8-20.3 6.5-39.8 0-65.9-4.7-18.7-13.6-32.6-32.3-32.6h-8.4zm-46.4 153.4c8.9 0 16.1 7.3 16.1 16.3 0 9-7.2 16.3-16.1 16.3-8.8 0-16.1-7.3-16.1-16.3 0-9 7.3-16.3 16.1-16.3z" fill="#ffd43b"/>
-                        </svg>
-                    </div>
-                    
-                    <!-- Credit text replacing company logo on back cover -->
-                    <div class="credit-text" style="margin: 30px auto; font-size: 1.2rem; color: var(--accent-color); font-weight: bold; text-align: center;">
-                        Provided by the Learning and Development Team
-                    </div>
-                    
-                    <div class="page-number">Back Cover</div>
-                </div>
+            <div class="page" id="page-10" style="z-index: 1;">
+    <div class="page-content" style="overflow-y: auto;">
+        <div class="cover" style="min-height: 100%;">
+            <h1>Happy Coding!</h1>
+            <p>You've learned the basics of Python programming. Keep practicing and exploring to build your skills!</p>
+            
+            <!-- Python Logo (Image 2) on back cover -->
+            <div class="python-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+                    <path d="M150 0c-14.4 0-28.4 1-40.8 2.6-36.2 4.8-42.8 14.9-42.8 33.6v24.7h85.6v11.5H66.4c-18.7 0-35.1 11.2-40.2 32.6-5.9 24.5-6.1 39.8 0 65.3s18.1 32.6 35.3 32.6h22.8v-29.4c0-21.3 18.4-40 40-40h80c17.7 0 32-14.3 32-32v-65.3c0-17.7-15-30.9-32-33.6C192 1.1 180.6 0 160.4 0H150zm-44.6 19.7c8.8 0 16.1 7.3 16.1 16.3s-7.2 16.3-16.1 16.3c-8.9 0-16.1-7.3-16.1-16.3s7.2-16.3 16.1-16.3z" fill="#4584b6"/>
+                    <path d="M219.8 72.4v28.5c0 22.1-18.7 40.7-39.9 40.7h-80c-17.5 0-32 15-32 32.6v61.2c0 17.4 15.1 27.7 32 32.6 20.4 5.9 39.9 7 64.2 0 16.2-4.6 32-13.9 32-32.6v-24.7H132v-11.5h96.3c18.7 0 25.7-13 32.3-32.5 6.8-20.3 6.5-39.8 0-65.9-4.7-18.7-13.6-32.6-32.3-32.6h-8.4zm-46.4 153.4c8.9 0 16.1 7.3 16.1 16.3 0 9-7.2 16.3-16.1 16.3-8.8 0-16.1-7.3-16.1-16.3 0-9 7.3-16.3 16.1-16.3z" fill="#ffd43b"/>
+                </svg>
             </div>
+            
+            <!-- Credit text replacing company logo on back cover -->
+            <div class="credit-text">
+                Provided by the Learning and Development Team
+            </div>
+            
+            <div class="page-number">Back Cover</div>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 
     <div class="controls">
         <button id="prev-btn" class="btn">Previous</button>
-        <span id="page-indicator" style="color: #333; margin: 0 15px;">Page 1 of 9</span>
+        <span id="page-indicator" style="color: #333; margin: 0 15px;">Page 1 of 10</span>
         <button id="next-btn" class="btn">Next</button>
     </div>
 
