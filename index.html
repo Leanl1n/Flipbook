@@ -22,7 +22,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
         }
         
         .book-container {
@@ -32,7 +31,6 @@
             position: relative;
             perspective: 1500px;
             margin: 50px auto;
-            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
         }
         
         .book {
@@ -51,15 +49,9 @@
             left: 0;
             overflow: hidden;
             transform-style: preserve-3d;
-            transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            transition: transform 1.0s cubic-bezier(0.645, 0.045, 0.355, 1.000);
             cursor: pointer;
             border-radius: 10px;
-            transform-origin: left center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        
-        .page.flipped {
-            transform: rotateY(-180deg);
         }
         
         .page-content {
@@ -73,11 +65,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             overflow: auto;
-            backface-visibility: hidden;
-            background-image: linear-gradient(135deg, rgba(255,255,255,0.05) 25%, transparent 25%, 
-                                transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, 
-                                transparent 75%, transparent);
-            background-size: 40px 40px;
         }
         
         .controls {
@@ -89,66 +76,31 @@
             justify-content: center;
             gap: 20px;
             z-index: 100;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border-radius: 50px;
-            width: fit-content;
-            margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .btn {
             background-color: var(--primary-color);
             color: var(--text-light);
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
-        }
-        
-        .btn:hover:before {
-            left: 100%;
+            transition: background-color 0.3s, transform 0.1s;
         }
         
         .btn:hover {
             background-color: var(--accent-color);
             color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
         .btn:active {
-            transform: scale(0.98) translateY(0);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transform: scale(0.98);
         }
         
         .btn:disabled {
             background-color: #ccc;
             cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
         }
         
         .page-number {
@@ -159,28 +111,9 @@
             color: var(--accent-color);
         }
         
-        h1, h2, h3 {
+        h1, h2 {
             color: var(--accent-color);
             margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h1:after, h2:after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent-color);
-            transform: scaleX(0);
-            transform-origin: bottom left;
-            transition: transform 0.3s ease-out;
-        }
-        
-        h1:hover:after, h2:hover:after {
-            transform: scaleX(1);
         }
         
         .logo {
@@ -221,27 +154,11 @@
             margin: 10px 0;
             font-family: monospace;
             overflow-x: auto;
-            border-left: 4px solid var(--accent-color);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .code-block:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: translateY(-2px);
         }
         
         .highlight {
             color: var(--accent-color);
             font-weight: bold;
-            position: relative;
-            transition: all 0.2s ease;
-            display: inline-block;
-        }
-        
-        .highlight:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 5px rgba(255, 213, 79, 0.5);
         }
         
         .keyword {
@@ -263,24 +180,9 @@
         .note {
             background-color: rgba(255, 213, 79, 0.2);
             border-left: 4px solid var(--accent-color);
-            padding: 15px;
+            padding: 10px;
             margin: 15px 0;
             border-radius: 0 5px 5px 0;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .note:hover {
-            background-color: rgba(255, 213, 79, 0.3);
-            transform: translateX(5px);
-        }
-        
-        .note:before {
-            content: "📝";
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            opacity: 0.5;
         }
         
         ul {
@@ -681,56 +583,18 @@
                 pageIndicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
             }
             
-            // Go to specific page with animation
+            // Go to specific page
             function goToPage(pageNum) {
                 if (pageNum < 0 || pageNum >= totalPages) return;
                 
-                // Add flipping animation
-                if (pageNum > currentPage) {
-                    // Going forward
-                    pages[currentPage].classList.add('flipped');
-                    setTimeout(() => {
-                        // Hide current page after animation
-                        pages[currentPage].style.display = 'none';
-                        pages[currentPage].classList.remove('flipped');
-                        
-                        // Show new page
-                        currentPage = pageNum;
-                        pages[currentPage].style.display = 'block';
-                        
-                        // Apply a subtle entrance animation
-                        pages[currentPage].style.opacity = '0';
-                        pages[currentPage].style.transform = 'translateX(40px)';
-                        setTimeout(() => {
-                            pages[currentPage].style.opacity = '1';
-                            pages[currentPage].style.transform = 'translateX(0)';
-                        }, 50);
-                        
-                        updateControls();
-                    }, 350); // Half the transition time
-                } else if (pageNum < currentPage) {
-                    // Going backward
-                    pages[currentPage].style.opacity = '0';
-                    pages[currentPage].style.transform = 'translateX(40px)';
-                    
-                    setTimeout(() => {
-                        // Hide current page
-                        pages[currentPage].style.display = 'none';
-                        
-                        // Show new page with reverse animation
-                        currentPage = pageNum;
-                        pages[currentPage].style.display = 'block';
-                        pages[currentPage].style.opacity = '0';
-                        pages[currentPage].style.transform = 'translateX(-40px)';
-                        
-                        setTimeout(() => {
-                            pages[currentPage].style.opacity = '1';
-                            pages[currentPage].style.transform = 'translateX(0)';
-                        }, 50);
-                        
-                        updateControls();
-                    }, 200);
-                }
+                // Hide current page
+                pages[currentPage].style.display = 'none';
+                
+                // Show new page
+                currentPage = pageNum;
+                pages[currentPage].style.display = 'block';
+                
+                updateControls();
             }
             
             // Event listeners
@@ -749,19 +613,6 @@
                 } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                     goToPage(currentPage - 1);
                 }
-            });
-            
-            // Add hover effect to pages for better UX
-            pages.forEach(page => {
-                page.addEventListener('mouseenter', () => {
-                    page.style.boxShadow = '0 10px 20px rgba(0,0,0,0.3)';
-                    page.style.transform = 'translateY(-5px)';
-                });
-                
-                page.addEventListener('mouseleave', () => {
-                    page.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)';
-                    page.style.transform = 'translateY(0)';
-                });
             });
             
             // Initialize controls
