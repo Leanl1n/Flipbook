@@ -826,7 +826,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageIndicator = document.getElementById('page-indicator');
     let currentPage = 0;
     const totalPages = pages.length;
-    let isAnimating = false;
     
     // Convert existing pages to have front and back faces
     pages.forEach((page, index) => {
@@ -867,9 +866,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function flipToPage(pageNum) {
-        if (isAnimating || pageNum < 0 || pageNum >= totalPages) return;
+        // Ensure pageNum is within bounds
+        if (pageNum < 0 || pageNum >= totalPages) {
+            return;
+        }
         
-        isAnimating = true;
         const direction = pageNum > currentPage ? 1 : -1;
         const currentPageEl = pages[currentPage];
         const nextPageEl = pages[pageNum];
@@ -882,60 +883,43 @@ document.addEventListener('DOMContentLoaded', function() {
         if (direction > 0) {
             currentPageEl.style.zIndex = totalPages + 1;
             nextPageEl.style.zIndex = totalPages;
-            
-            // Add blank page to back of current page
-            const blankPage = document.createElement('div');
-            blankPage.className = 'blank-page';
-            currentPageEl.querySelector('.page-back').appendChild(blankPage);
-            
-            // Trigger forward flip animation
-            requestAnimationFrame(() => {
-                currentPageEl.classList.add('flipped');
-                
-                setTimeout(() => {
-                    cleanupAnimation(currentPageEl, nextPageEl, pageNum);
-                }, 500);
-            });
         } else {
             currentPageEl.style.zIndex = totalPages;
             nextPageEl.style.zIndex = totalPages + 1;
-            
-            // Add blank page to back of next page
-            const blankPage = document.createElement('div');
-            blankPage.className = 'blank-page';
-            nextPageEl.querySelector('.page-back').appendChild(blankPage);
-            
-            nextPageEl.classList.add('flipped');
-            
-            // Trigger backward flip animation
-            requestAnimationFrame(() => {
-                nextPageEl.classList.remove('flipped');
-                
-                setTimeout(() => {
-                    cleanupAnimation(currentPageEl, nextPageEl, pageNum);
-                }, 500);
-            });
+            nextPageEl.classList.remove('flipped');
         }
+        
+        // Add blank page to back of current page
+        const blankPage = document.createElement('div');
+        blankPage.className = 'blank-page';
+        currentPageEl.querySelector('.page-back').appendChild(blankPage);
+        
+        // Trigger animation
+        requestAnimationFrame(() => {
+            if (direction > 0) {
+                currentPageEl.classList.add('flipped');
+            } else {
+                currentPageEl.classList.remove('flipped');
+            }
+            
+            // After animation completes
+            setTimeout(() => {
+                // Clean up
+                currentPageEl.style.display = 'none';
+                nextPageEl.style.display = 'block';
+                nextPageEl.style.zIndex = '';
+                currentPageEl.style.zIndex = '';
+                
+                // Remove blank page
+                const blankPages = document.querySelectorAll('.blank-page');
+                blankPages.forEach(page => page.remove());
+                
+                currentPage = pageNum;
+                updateControls();
+            }, 500);
+        });
     }
     
-    function cleanupAnimation(currentPageEl, nextPageEl, pageNum) {
-        // Clean up after animation
-        currentPageEl.style.display = 'none';
-        nextPageEl.style.display = 'block';
-        nextPageEl.style.zIndex = '';
-        currentPageEl.style.zIndex = '';
-        currentPageEl.classList.remove('flipped');
-        
-        // Remove blank pages
-        const blankPages = document.querySelectorAll('.blank-page');
-        blankPages.forEach(page => page.remove());
-        
-        currentPage = pageNum;
-        isAnimating = false;
-        updateControls();
-    }
-    
-    // Event Listeners
     prevBtn.addEventListener('click', () => {
         if (currentPage > 0) {
             flipToPage(currentPage - 1);
