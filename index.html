@@ -368,6 +368,64 @@
             height: auto;
             z-index: 10;
         }
+
+        .page {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transform-origin: left;
+        }
+
+        .page-front,
+        .page-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden; /* Chrome support */
+        }
+
+        .page-back {
+            transform: rotateY(180deg);
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page.prev-flip {
+            transform: rotateY(0deg);
+        }
+
+        // Add these CSS rules to your existing styles
+
+.page {
+    transition: transform 0.5s ease;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+}
+
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+
+.page-front,
+.page-back {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.page-back {
+    transform: rotateY(180deg);
+}
+
+.blank-page {
+    transition: transform 0.5s ease;
+}
     </style>
 </head>
 <body>
@@ -826,6 +884,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageIndicator = document.getElementById('page-indicator');
     let currentPage = 0;
     const totalPages = pages.length;
+    let isAnimating = false;
     
     // Convert existing pages to have front and back faces
     pages.forEach((page, index) => {
@@ -866,11 +925,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function flipToPage(pageNum) {
-        // Ensure pageNum is within bounds
-        if (pageNum < 0 || pageNum >= totalPages) {
-            return;
-        }
+        if (isAnimating || pageNum < 0 || pageNum >= totalPages) return;
         
+        isAnimating = true;
         const direction = pageNum > currentPage ? 1 : -1;
         const currentPageEl = pages[currentPage];
         const nextPageEl = pages[pageNum];
@@ -879,47 +936,50 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPageEl.style.display = 'block';
         nextPageEl.style.display = 'block';
         
-        // Set z-indexes for proper stacking
+        // Set initial states
         if (direction > 0) {
+            // Forward flip
             currentPageEl.style.zIndex = totalPages + 1;
             nextPageEl.style.zIndex = totalPages;
+            
+            requestAnimationFrame(() => {
+                currentPageEl.classList.add('flipped');
+                setTimeout(() => {
+                    cleanupAnimation(currentPageEl, nextPageEl, pageNum);
+                }, 600);
+            });
         } else {
+            // Backward flip
             currentPageEl.style.zIndex = totalPages;
             nextPageEl.style.zIndex = totalPages + 1;
-            nextPageEl.classList.remove('flipped');
-        }
-        
-        // Add blank page to back of current page
-        const blankPage = document.createElement('div');
-        blankPage.className = 'blank-page';
-        currentPageEl.querySelector('.page-back').appendChild(blankPage);
-        
-        // Trigger animation
-        requestAnimationFrame(() => {
-            if (direction > 0) {
-                currentPageEl.classList.add('flipped');
-            } else {
-                currentPageEl.classList.remove('flipped');
-            }
+            nextPageEl.classList.add('flipped');
             
-            // After animation completes
-            setTimeout(() => {
-                // Clean up
-                currentPageEl.style.display = 'none';
-                nextPageEl.style.display = 'block';
-                nextPageEl.style.zIndex = '';
-                currentPageEl.style.zIndex = '';
+            requestAnimationFrame(() => {
+                nextPageEl.classList.add('prev-flip');
+                nextPageEl.classList.remove('flipped');
                 
-                // Remove blank page
-                const blankPages = document.querySelectorAll('.blank-page');
-                blankPages.forEach(page => page.remove());
-                
-                currentPage = pageNum;
-                updateControls();
-            }, 500);
-        });
+                setTimeout(() => {
+                    cleanupAnimation(currentPageEl, nextPageEl, pageNum);
+                    nextPageEl.classList.remove('prev-flip');
+                }, 600);
+            });
+        }
     }
     
+    function cleanupAnimation(currentPageEl, nextPageEl, pageNum) {
+        // Clean up after animation
+        currentPageEl.style.display = 'none';
+        nextPageEl.style.display = 'block';
+        nextPageEl.style.zIndex = '';
+        currentPageEl.style.zIndex = '';
+        currentPageEl.classList.remove('flipped');
+        
+        currentPage = pageNum;
+        isAnimating = false;
+        updateControls();
+    }
+    
+    // Event Listeners
     prevBtn.addEventListener('click', () => {
         if (currentPage > 0) {
             flipToPage(currentPage - 1);
