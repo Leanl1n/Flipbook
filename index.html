@@ -149,48 +149,49 @@
         /* Adjust controls position for larger book */
         .controls {
             position: fixed;
-            bottom: 15px;      /* Reduced from 20px */
+            top: 50%;
             left: 0;
             right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            z-index: 100;
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 1000;
         }
-        
-        /* Enhanced button styles */
-        .btn {
-            background: linear-gradient(135deg,
-                var(--primary-color) 0%,
-                #1a3c66 100%);
-            color: var(--text-light);
+
+        .arrow-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(13, 44, 85, 0.8);
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
             cursor: pointer;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            pointer-events: auto;
         }
-        
-        .btn:hover {
-            background: linear-gradient(135deg,
-                var(--accent-color) 0%,
-                #ffc107 100%);
+
+        .arrow-btn:hover {
+            background: var(--accent-color);
             color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transform: translateY(-50%) scale(1.1);
         }
-        
-        .btn:active {
-            transform: scale(0.98);
-        }
-        
-        .btn:disabled {
-            background-color: #ccc;
+
+        .arrow-btn:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
+        }
+
+        .arrow-btn.left {
+            left: 20px;
+        }
+
+        .arrow-btn.right {
+            right: 20px;
         }
         
         /* Enhanced page number style */
@@ -873,10 +874,17 @@
     </div>
 
     <div class="controls">
-        <button id="prev-btn" class="btn">Previous</button>
-        <span id="page-indicator" style="color: #333; margin: 0 15px;">Page 1 of 10</span>
-        <button id="next-btn" class="btn">Next</button>
-    </div>
+    <button id="prev-btn" class="arrow-btn left">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+        </svg>
+    </button>
+    <button id="next-btn" class="arrow-btn right">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+        </svg>
+    </button>
+</div>
 
     <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -914,7 +922,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function updateControls() {
         prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === totalPages - 1;
+        // Remove the next button disable state
+        // nextBtn.disabled = currentPage === totalPages - 1;
         
         // Update page indicator text
         if (currentPage === 0) {
@@ -989,15 +998,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages - 1) {
+        if (currentPage === totalPages - 1) {
+            // If on last page, go back to cover
+            flipToPage(0);
+        } else if (currentPage < totalPages - 1) {
             flipToPage(currentPage + 1);
         }
     });
     
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-        if ((e.key === 'ArrowRight' || e.key === 'ArrowDown') && currentPage < totalPages - 1) {
-            flipToPage(currentPage + 1);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            if (currentPage === totalPages - 1) {
+                flipToPage(0); // Return to cover
+            } else {
+                flipToPage(currentPage + 1);
+            }
         } else if ((e.key === 'ArrowLeft' || e.key === 'ArrowUp') && currentPage > 0) {
             flipToPage(currentPage - 1);
         }
