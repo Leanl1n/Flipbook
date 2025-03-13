@@ -129,27 +129,10 @@
 
         /* Add specific style for page 8 content */
         #page-8 .page-content {
-            overflow-y: scroll; /* Force vertical scrollbar */
+            overflow-y: auto; /* Change from scroll to auto */
             max-height: 100%; /* Ensure content is constrained to page height */
-            scrollbar-width: thin; /* For Firefox */
-            scrollbar-color: var(--accent-color) var(--primary-color); /* For Firefox */
         }
 
-        /* Customize scrollbar for WebKit browsers */
-        #page-8 .page-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #page-8 .page-content::-webkit-scrollbar-track {
-            background: var(--primary-color);
-            border-radius: 4px;
-        }
-
-        #page-8 .page-content::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
-            border-radius: 4px;
-        }
-        
         /* Add page fold effect */
         .page-content::after {
             content: '';
@@ -376,6 +359,15 @@
                 rgba(255,255,255,0) 60%);
             pointer-events: none;
         }
+
+        .rdb-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;  /* Adjust size as needed */
+            height: auto;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
@@ -384,6 +376,7 @@
             <!-- Cover -->
             <div class="page" id="page-0" style="z-index: 9;">
                 <div class="page-content cover">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <!-- Python Logo (Image 2) -->
                     <div class="python-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
@@ -395,8 +388,7 @@
                     <h1>Python</h1>
                     <p>Learn to code with Python — simple, powerful, and made for everyone</p>
                     
-                    <!-- Credit text replacing company logo -->
-                    <div class="credit-text" style="margin: 30px auto; font-size: 1.2rem; color: var(--accent-color); font-weight: bold; text-align: center;">
+                    <div class="credit-text">
                         Provided by the Learning and Development Team
                     </div>
                     
@@ -407,6 +399,7 @@
             <!-- Page 1 - What is Python -->
             <div class="page" id="page-1" style="z-index: 8;">
                 <div class="page-content">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <h1>What is Python?</h1>
                     <ul>
                         <li>Python is a <span class="highlight">high-level, beginner-friendly programming language</span>.</li>
@@ -445,6 +438,7 @@
             <!-- Page 2 - Variables and Data Types -->
             <div class="page" id="page-2" style="z-index: 7;">
                 <div class="page-content">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <h1>Variables and Data types</h1>
                     
                     <p>A <span class="highlight">variable</span> is a name that stores a value, and a <span class="highlight">data type</span> defines the kind of value a variable holds.</p>
@@ -491,6 +485,7 @@
             <!-- Page 3 - The Print and Input Functions -->
             <div class="page" id="page-3" style="z-index: 6;">
                 <div class="page-content">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <h1>The Print() Function</h1>
                     
                     <p>The <span class="highlight">print()</span> function displays text or values on the screen.</p>
@@ -531,6 +526,7 @@
             <!-- Page 4 - Conditional Statements -->
             <div class="page" id="page-4" style="z-index: 5;">
                 <div class="page-content">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <h1>Conditional Statements</h1>
                     
                     <p><span class="highlight">Conditional</span> statements allow a program to make decisions based on conditions. The most common ones are <span class="highlight">if</span>, <span class="highlight">elif</span>, and <span class="highlight">else</span>.</p>
@@ -565,6 +561,7 @@
             <!-- Page 5 - Loops -->
             <div class="page" id="page-5" style="z-index: 4;">
                 <div class="page-content">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <h1>Loops</h1>
                     
                     <p><span class="highlight">Loops</span> help repeat code multiple times. The two main types of loops in Python are <span class="highlight">for</span> and <span class="highlight">while</span>.</p>
@@ -615,6 +612,7 @@
             <!-- Page 6 - Lists -->
             <div class="page" id="page-6" style="z-index: 3;">
                 <div class="page-content">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <h1>Lists</h1>
                     
                     <p>A <span class="highlight">list</span> is a collection of items stored in a specific order. Lists can hold different types of data, like numbers, strings, or even other lists.</p>
@@ -646,6 +644,7 @@
             <!-- Page 7 - Functions -->
             <div class="page" id="page-7" style="z-index: 2;">
                 <div class="page-content">
+                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
                     <h1>Functions</h1>
                     
                     <p>A <span class="highlight">function</span> is a reusable block of code that performs a specific task. Functions help make code organized and efficient.</p>
@@ -683,6 +682,7 @@
             <!-- Page 8 - Exercise Part 1 -->
 <div class="page" id="page-8" style="z-index: 2;">
     <div class="page-content">
+        <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
         <h1>Practice Exercise - Part 1</h1>
         
         <p>Let's practice what you've learned! Create a Python script to download this HTML file from GitHub.</p>
@@ -736,6 +736,7 @@
 <!-- Page 9 - Exercise Part 2 -->
 <div class="page" id="page-9" style="z-index: 2;">
     <div class="page-content">
+        <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
         <h1>Practice Exercise - Part 2</h1>
 
         <h3>Step 4: Run the Script</h3>
@@ -786,6 +787,7 @@
             <!-- Back Cover -->
             <div class="page" id="page-10" style="z-index: 1;">
     <div class="page-content" style="overflow-y: auto;">
+        <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
         <div class="cover" style="min-height: 100%;">
             <h1>Happy Coding!</h1>
             <p>You've learned the basics of Python programming. Keep practicing and exploring to build your skills!</p>
@@ -817,110 +819,131 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const pages = document.querySelectorAll('.page');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const pageIndicator = document.getElementById('page-indicator');
-            let currentPage = 0;
-            const totalPages = pages.length;
-            
-            // Convert existing pages to have front and back faces
-            pages.forEach((page, index) => {
-                const content = page.innerHTML;
-                page.innerHTML = '';
-                
-                const front = document.createElement('div');
-                front.className = 'page-front';
-                front.innerHTML = content;
-                
-                const back = document.createElement('div');
-                back.className = 'page-back';
-                
-                page.appendChild(front);
-                page.appendChild(back);
-                
-                // Set initial z-index
-                page.style.zIndex = totalPages - index;
-            });
-            
-            // Initially hide all pages except the first
-            for (let i = 1; i < pages.length; i++) {
-                pages[i].style.display = 'none';
+document.addEventListener('DOMContentLoaded', function() {
+    const pages = document.querySelectorAll('.page');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const pageIndicator = document.getElementById('page-indicator');
+    let currentPage = 0;
+    const totalPages = pages.length;
+    
+    // Convert existing pages to have front and back faces
+    pages.forEach((page, index) => {
+        const content = page.innerHTML;
+        page.innerHTML = '';
+        
+        const front = document.createElement('div');
+        front.className = 'page-front';
+        front.innerHTML = content;
+        
+        const back = document.createElement('div');
+        back.className = 'page-back';
+        
+        page.appendChild(front);
+        page.appendChild(back);
+        
+        // Set initial z-index
+        page.style.zIndex = totalPages - index;
+    });
+    
+    // Initially hide all pages except the first
+    for (let i = 1; i < pages.length; i++) {
+        pages[i].style.display = 'none';
+    }
+    
+    function updateControls() {
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = currentPage === totalPages - 1;
+        
+        // Update page indicator text
+        if (currentPage === 0) {
+            pageIndicator.textContent = 'Cover';
+        } else if (currentPage === totalPages - 1) {
+            pageIndicator.textContent = 'Back Cover';
+        } else {
+            pageIndicator.textContent = `Page ${currentPage} of ${totalPages - 2}`;
+        }
+    }
+    
+    function flipToPage(pageNum) {
+        // Ensure pageNum is within bounds
+        if (pageNum < 0 || pageNum >= totalPages) {
+            return;
+        }
+        
+        const direction = pageNum > currentPage ? 1 : -1;
+        const currentPageEl = pages[currentPage];
+        const nextPageEl = pages[pageNum];
+        
+        // Reset display and z-index
+        currentPageEl.style.display = 'block';
+        nextPageEl.style.display = 'block';
+        
+        // Set z-indexes for proper stacking
+        if (direction > 0) {
+            currentPageEl.style.zIndex = totalPages + 1;
+            nextPageEl.style.zIndex = totalPages;
+        } else {
+            currentPageEl.style.zIndex = totalPages;
+            nextPageEl.style.zIndex = totalPages + 1;
+            nextPageEl.classList.remove('flipped');
+        }
+        
+        // Add blank page to back of current page
+        const blankPage = document.createElement('div');
+        blankPage.className = 'blank-page';
+        currentPageEl.querySelector('.page-back').appendChild(blankPage);
+        
+        // Trigger animation
+        requestAnimationFrame(() => {
+            if (direction > 0) {
+                currentPageEl.classList.add('flipped');
+            } else {
+                currentPageEl.classList.remove('flipped');
             }
             
-            function updateControls() {
-                prevBtn.disabled = currentPage === 0;
-                nextBtn.disabled = currentPage === totalPages - 1;
-                pageIndicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
-            }
-            
-            function flipToPage(pageNum) {
-                if (pageNum < 0 || pageNum >= totalPages) return;
-                
-                const direction = pageNum > currentPage ? 1 : -1;
-                const currentPageEl = pages[currentPage];
-                const nextPageEl = pages[pageNum];
-                
-                // Reset display and z-index
-                currentPageEl.style.display = 'block';
+            // After animation completes
+            setTimeout(() => {
+                // Clean up
+                currentPageEl.style.display = 'none';
                 nextPageEl.style.display = 'block';
+                nextPageEl.style.zIndex = '';
+                currentPageEl.style.zIndex = '';
                 
-                // Set z-indexes for proper stacking
-                if (direction > 0) {
-                    currentPageEl.style.zIndex = totalPages + 1;
-                    nextPageEl.style.zIndex = totalPages;
-                } else {
-                    currentPageEl.style.zIndex = totalPages;
-                    nextPageEl.style.zIndex = totalPages + 1;
-                    nextPageEl.classList.remove('flipped');
-                }
+                // Remove blank page
+                const blankPages = document.querySelectorAll('.blank-page');
+                blankPages.forEach(page => page.remove());
                 
-                // Add blank page to back of current page
-                const blankPage = document.createElement('div');
-                blankPage.className = 'blank-page';
-                currentPageEl.querySelector('.page-back').appendChild(blankPage);
-                
-                // Trigger animation
-                requestAnimationFrame(() => {
-                    if (direction > 0) {
-                        currentPageEl.classList.add('flipped');
-                    } else {
-                        currentPageEl.classList.remove('flipped');
-                    }
-                    
-                    // After animation completes
-                    setTimeout(() => {
-                        // Clean up
-                        currentPageEl.style.display = 'none';
-                        nextPageEl.style.display = 'block';
-                        nextPageEl.style.zIndex = '';
-                        currentPageEl.style.zIndex = '';
-                        
-                        // Remove blank page
-                        const blankPages = document.querySelectorAll('.blank-page');
-                        blankPages.forEach(page => page.remove());
-                        
-                        currentPage = pageNum;
-                        updateControls();
-                    }, 500);
-                });
-            }
-            
-            prevBtn.addEventListener('click', () => flipToPage(currentPage - 1));
-            nextBtn.addEventListener('click', () => flipToPage(currentPage + 1));
-            
-            // Keyboard navigation
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                    flipToPage(currentPage + 1);
-                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                    flipToPage(currentPage - 1);
-                }
-            });
-            
-            updateControls();
+                currentPage = pageNum;
+                updateControls();
+            }, 500);
         });
-    </script>
+    }
+    
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+            flipToPage(currentPage - 1);
+        }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages - 1) {
+            flipToPage(currentPage + 1);
+        }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if ((e.key === 'ArrowRight' || e.key === 'ArrowDown') && currentPage < totalPages - 1) {
+            flipToPage(currentPage + 1);
+        } else if ((e.key === 'ArrowLeft' || e.key === 'ArrowUp') && currentPage > 0) {
+            flipToPage(currentPage - 1);
+        }
+    });
+    
+    updateControls();
+});
+</script>
+    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
 </body>
 </html>
