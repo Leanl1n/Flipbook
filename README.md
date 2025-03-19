@@ -1,4 +1,5 @@
-📚 Flipbook: Session 1
+📚 Flipbook:
+
 This session introduces basic Python concepts through interactive notebooks.
 
 🔥 Topics Covered
