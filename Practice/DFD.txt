@@ -1,0 +1,93 @@
+
+Problem - Brainstorm - Data Flow Diagram - Scale - Execution
+
+
+PROBLEM
+A simple Calculator
+
+Brainstorm
+Here are the key functions and syntax that we need to use:
+
+1. while True: (Loop for Continuous Execution)
+    Ensures the calculator keeps running until the user chooses to exit.
+
+    Stops when break is executed.
+
+2. if-elif-else (Conditional Statements)
+    Used to handle different operations based on user input.
+
+    Checks if the user wants to exit (if choice == '5').
+
+    Handles invalid inputs (else).
+
+3. try-except (Error Handling)
+    Used to catch non-numeric inputs and prevent the program from crashing.
+
+    ValueError is caught when the user enters invalid numbers.
+
+4. input() (User Input)
+    Captures user input for the operation choice and numbers.
+
+5. float() (Type Conversion)
+    Converts user input (string) to a floating-point number.
+
+6. break (Loop Control)
+    Exits the while True loop when the user selects "Exit".
+
+7. print() (Displaying Output)
+    Used to display the result or error messages.
+
+
+DFD
+Level 0 (Context Diagram)
+User → Inputs choice and numbers → Calculator Program → Outputs result or error message
+
+Level 1 (Detailed DFD)
+1. Start Program: The calculator prompts the user for an operation.
+
+2. User Input: The user enters a choice (1. Add, 2. Subtract, 3. Multiply, 4. Divide, or 5. Exit).
+
+3. Validation Check:
+
+    If Exit (5) → End program.
+
+    If Invalid choice → Display error message and prompt again.
+
+4. Number Input: If the choice is valid (1-4), the user enters two numbers.
+
+5. Validation Check:
+
+    If non-numeric input → Display error message and prompt again.
+
+    If division by zero → Display error message and prompt again.
+
+6. Perform Calculation:
+
+    Addition: num1 + num2
+
+    Subtraction: num1 - num2
+
+    Multiplication: num1 * num2
+
+    Division: num1 / num2
+
+7. Display Result: The program prints the result.
+
+8. Repeat or Exit: The program loops back to Step 1 unless the user selects Exit.
+
+
+Scale
+Functionality Expansion
+
+1. Add more operations like exponentiation, modulus, square root, or logarithm.
+
+2. Support complex numbers for advanced calculations.
+
+3. Implement a history feature to store previous calculations.
+
+ETC......
+
+Execution
+1. Deploying as a Desktop Application
+2. Deploying as a Web Application
+3. Deploying in the Cloud
