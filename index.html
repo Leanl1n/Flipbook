@@ -700,153 +700,108 @@
                 </div>
             </div>
 
-            <!-- Page 7 - Functions -->
-            <div class="page" id="page-7" style="z-index: 2;">
-                <div class="page-content">
-                    <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
-                    <h1>Functions</h1>
-                    
-                    <p>A <span class="highlight">function</span> is a reusable block of code that performs a specific task. Functions help make code organized and efficient.</p>
-                    
-                    <h3>Examples:</h3>
-                    <div class="code-block">
-                        <span class="comment"># Input: defining a function</span><br>
-                        <span class="keyword">def</span> <span class="function">greet</span>(name):<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"Hello, "</span>, name)<br><br>
-                        <span class="comment"># Output: calling a function</span><br>
-                        <span class="function">greet</span>(<span class="string">"Alice"</span>)<br>
-                        <span class="comment"># Output: Hello, Alice</span><br><br>
-                        <span class="function">greet</span>(<span class="string">"Bob"</span>)<br>
-                        <span class="comment"># Output: Hello, Bob</span>
-                    </div>
-                    
-                    <h3>Another Example of a function</h3>
-                    <div class="code-block">
-                        <span class="keyword">def</span> <span class="function">add</span>(a, b):<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> a + b<br><br>
-                        result = <span class="function">add</span>(3, 5)<br>
-                        <span class="function">print</span>(result)<br>
-                        <span class="comment">#print(add(3,5))</span><br><br>
-                        <span class="comment"># Output: 8</span>
-                    </div>
-                    
-                    <div class="note">
-                        Use <span class="highlight">return</span> to get an output from a function instead of just printing.
-                    </div>
-                    
-                    <div class="page-number">7</div>
-                </div>
-            </div>
+            <!-- Page 7 - Python Classes Part 1 -->
+<div class="page" id="page-7" style="z-index: 3;">
+    <div class="page-content">
+        <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
+        <h1>Python Classes (Part 1)</h1>
+        
+        <h2>What are Classes?</h2>
+        <p>A <span class="highlight">class</span> is a blueprint for creating objects. It defines a set of attributes and methods that the objects of that class will have.</p>
+        
+        <h3>Key Terminology</h3>
+        <ul>
+            <li><span class="highlight">Object</span>: An instance of a class</li>
+            <li><span class="highlight">Attribute</span>: A variable that stores data within a class</li>
+            <li><span class="highlight">Method</span>: A function defined inside a class</li>
+            <li><span class="highlight">Constructor (__init__)</span>: A special method that initializes a new object</li>
+            <li><span class="highlight">Self</span>: A reference to the current instance of the class</li>
+        </ul>
+        
+        <h3>Basic Class Structure</h3>
+        <div class="code-block">
+            <span class="keyword">class</span> Pet:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, name, age):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.name = name<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.age = age<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">introduce</span>(<span class="keyword">self</span>):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"Hi! I'm {self.name}, {self.age} years old"</span>)
+        </div>
+        
+        <h3>Creating and Using Objects</h3>
+        <div class="code-block">
+            <span class="comment"># Create a pet object</span><br>
+            my_pet = Pet(<span class="string">"Buddy"</span>, 3)<br>
+            <br>
+            <span class="comment"># Use object methods</span><br>
+            my_pet.introduce()<br>
+            <span class="comment"># Output: Hi! I'm Buddy, 3 years old</span>
+        </div>
+        
+        <div class="page-number">7</div>
+    </div>
+</div>
 
-            <!-- Page 8 - Exercise Part 1 -->
+<!-- Page 8 - Python Classes Part 2 -->
 <div class="page" id="page-8" style="z-index: 2;">
     <div class="page-content">
         <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
-        <h1>Practice Exercise - Part 1</h1>
+        <h1>Python Classes (Part 2)</h1>
         
-        <p>Let's practice what you've learned! Create a Python script to download this HTML file from GitHub.</p>
+        <h2>Inheritance</h2>
+        <p>Classes can inherit attributes and methods from other classes. This is called <span class="highlight">inheritance</span>.</p>
         
-        <h3>Step 1: Prepare Your Environment</h3>
-        <div class="note">
-            <strong>Open Command Prompt (CMD):</strong><br>
-            1. Press <code>Windows + R</code><br>
-            2. Type <code>cmd</code> and press Enter<br>
-            3. Or search for "Command Prompt" in Windows search
+        <h3>Inheritance Example</h3>
+        <div class="code-block">
+            <span class="keyword">class</span> Animal:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, name, species):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.name = name<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.species = species<br>
+            <br>
+            <span class="keyword">class</span> Dog(Animal):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, name, breed):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">super</span>().__init__(name, species=<span class="string">"Dog"</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.breed = breed<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">bark</span>(<span class="keyword">self</span>):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"{self.name} says Woof!"</span>)
         </div>
 
-        <h3>Step 2: Install Required Library</h3>
+        <h3>Using Inheritance</h3>
         <div class="code-block">
-            <span class="comment"># Type this in CMD:</span><br>
-            pip install requests
+            <span class="comment"># Create a dog object</span><br>
+            my_dog = Dog(<span class="string">"Max"</span>, <span class="string">"Golden Retriever"</span>)<br>
+            <br>
+            <span class="comment"># Access inherited attributes</span><br>
+            <span class="function">print</span>(<span class="string">f"Name: {my_dog.name}"</span>)<br>
+            <span class="function">print</span>(<span class="string">f"Species: {my_dog.species}"</span>)<br>
+            <span class="function">print</span>(<span class="string">f"Breed: {my_dog.breed}"</span>)<br>
+            my_dog.bark()<br>
+            <br>
+            <span class="comment"># Output:</span><br>
+            <span class="comment"># Name: Max</span><br>
+            <span class="comment"># Species: Dog</span><br>
+            <span class="comment"># Breed: Golden Retriever</span><br>
+            <span class="comment"># Max says Woof!</span>
         </div>
         
-        <h3>Step 3: Create Python Script</h3>
         <div class="note">
-            <strong>Open VS Code:</strong><br>
-            1. Download VS Code from <a href="https://code.visualstudio.com/" style="color: var(--accent-color);">code.visualstudio.com</a><br>
-            2. Install VS Code on your computer<br>
-            3. Open VS Code and create new file named <code>download_flipbook.py</code><br>
-            4. Copy the code below:
-        </div>
-        
-        <div class="code-block">
-            <span class="comment"># Save this as download_flipbook.py</span><br>
-            <span class="keyword">import</span> requests<br>
-            <br>
-            <span class="keyword">def</span> <span class="function">download_flipbook</span>():<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;url = <span class="string">"https://bltzbeat.github.io/Flipbook/"</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response = requests.<span class="function">get</span>(url, timeout=5)<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.raise_for_status()<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"python_flipbook.html"</span>, <span class="string">"w"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.write(response.text)<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"FlipBook downloaded successfully!"</span>)<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">except</span> requests.Timeout:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"Connection timed out. Please check your internet."</span>)<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">except</span> Exception <span class="keyword">as</span> e:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"Error downloading flipbook: {e}"</span>)<br>
-            <br>
-            <span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;download_flipbook()
+            <strong>Why Use Classes?</strong>
+            <ul>
+                <li>Organize and structure code</li>
+                <li>Create reusable and modular code</li>
+                <li>Model real-world entities and their behaviors</li>
+                <li>Implement object-oriented programming principles</li>
+            </ul>
         </div>
         
         <div class="page-number">8</div>
     </div>
 </div>
 
-<!-- Page 9 - Exercise Part 2 -->
-<div class="page" id="page-9" style="z-index: 2;">
-    <div class="page-content">
-        <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
-        <h1>Practice Exercise - Part 2</h1>
-
-        <h3>Step 4: Run the Script</h3>
-        <div class="note">
-            <strong>Using VS Code Terminal:</strong><br>
-            1. Open VS Code and your script<br>
-            2. Press <code>Ctrl + `</code> to open terminal<br>
-            3. Run: <code>python download_flipbook.py</code>
-        </div>
-
-        <div class="note">
-            <strong>Using Command Prompt:</strong><br>
-            1. Navigate to script location:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>cd C:\Users\YourName\Desktop</code><br>
-            2. Run the script:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>python download_flipbook.py</code>
-        </div>
-
-        <h3>Common Issues & Solutions:</h3>
-        <ul>
-            <li><span class="highlight">ModuleNotFoundError</span>: Run <code>pip install requests</code></li>
-            <li><span class="highlight">Permission Error</span>: Run as administrator</li>
-            <li><span class="highlight">Python not found</span>: Check Python PATH</li>
-            <li><span class="highlight">Timeout Error</span>: Check internet connection</li>
-        </ul>
-
-        <div class="note">
-            <strong>Performance Tips:</strong><br>
-            - Use VS Code's integrated terminal for faster workflow<br>
-            - Keep script in an easily accessible location<br>
-            - Added timeout to prevent long waiting times<br>
-            - Specific error handling for better debugging
-        </div>
-        
-        <div class="note">
-            <strong>File Location:</strong><br>
-            After running the script, find your downloaded file:<br>
-            - Same folder as your Python script<br>
-            - Named: <code>python_flipbook.html</code><br>
-            - Default location example:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<code>C:\Users\YourName\Desktop\python_flipbook.html</code>
-        </div>
-
-        <div class="page-number">9</div>
-    </div>
-</div>
-
-            <!-- Back Cover -->
-            <div class="page" id="page-10" style="z-index: 1;">
+<!-- Back Cover - Update ID to page-9 -->
+<div class="page" id="page-9" style="z-index: 1;">
     <div class="page-content" style="overflow-y: auto;">
         <img src="rdb_logo.png" alt="RDB Logo" class="rdb-logo">
         <div class="cover" style="min-height: 100%;">
@@ -861,7 +816,6 @@
                 </svg>
             </div>
             
-            <!-- Credit text replacing company logo on back cover -->
             <div class="credit-text">
                 Provided by the Learning and Development Team
             </div>
